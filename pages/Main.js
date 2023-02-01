@@ -11,7 +11,7 @@ import json from '../resource/flightList';
 export default function Main() {
   // 항공편 검색 조건을 담고 있는 상태
   const [condition, setCondition] = useState({
-    departure: 'ICN',
+    departure: 'ICN'
   });
   const [flightList, setFlightList] = useState(json);
 
@@ -22,7 +22,7 @@ export default function Main() {
       condition.destination !== destination
     ) {
       console.log('condition 상태를 변경시킵니다');
-
+      setCondition({ departure, destination })
       // TODO: search 함수가 전달 받아온 '항공편 검색 조건' 인자를 condition 상태에 적절하게 담아보세요.
     }
   };
@@ -56,7 +56,7 @@ export default function Main() {
 
       <main>
         <h1>여행가고 싶을 땐, States Airline</h1>
-        <Search />
+        <Search onSearch={search}/>
         <div className="table">
           <div className="row-header">
             <div className="col">출발</div>
