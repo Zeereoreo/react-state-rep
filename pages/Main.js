@@ -42,13 +42,14 @@ export default function Main() {
 
   // TODO: Effeck Hook을 이용해 AJAX 요청을 보내보세요.
   // TODO: 더불어, 네트워크 요청이 진행됨을 보여주는 로딩 컴포넌트(<LoadingIndicator/>)를 제공해보세요.
-  useEffect(async () => {
-    setIsLoading(true)
-    let res = await getFlight(condition)
-      setFlightList(res)
-      setIsLoading(false)
-  
-  }, [condition])
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(async () => {
+      const json = await getFlight(condition);
+      setFlightList(json);
+      setIsLoading(false);
+    }, 5000);
+  }, [condition]);
 
   // TODO: 테스트 케이스의 지시에 따라 search 함수를 Search 컴포넌트로 내려주세요.
   return (
