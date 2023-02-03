@@ -5,7 +5,7 @@ if (typeof window !== 'undefined') {
   localStorage.setItem('flight', JSON.stringify(flightList));
 }
 
-export function getFlight(filterBy = {}) {
+export async function getFlight(filterBy = {}) {
   // HINT: 가장 마지막 테스트를 통과하기 위해, fetch를 이용합니다. 아래 구현은 완전히 삭제되어도 상관없습니다.
   // TODO: 아래 구현을 REST API 호출로 대체하세요.
 
@@ -31,15 +31,12 @@ export function getFlight(filterBy = {}) {
   //     resolve(filtered);
   //   }, 500);
   // });
-  let result = ''
-  if(filterBy.departrue){
-    result = result + `desparture=${filterBy.departrue}&`
-  }
-  if(filterBy.destination){
-    result = result + `destination=${filterBy.destination}`
-  }
-  let url = `http://ec2-13-124-90-231.ap-northeast-2.compute.amazonaws.com:81/flight?${result}`
 
-  return fetch(url)
-    .then(res=>res.json())
+  let url = "http://ec2-13-124-90-231.ap-northeast-2.compute.amazonaws.com:81/flight?departure=ICN";
+  if(filterBy.destination){
+    url = `${url}&destination=${filterBy.destination}`
+  }
+
+  const res = await fetch(url);
+  return await res.json();
 }
